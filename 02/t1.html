@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多事件</title>
+	<script type="text/javascript">
+		function aaa(){
+			alert('a')
+		}
+		function bbb(){
+			alert('b')
+		}
+		//1.谁
+		//2.事件
+		//3.函数
+		function myAddEvent(obj, sEvenet, fn) {
+			if (obj.attachEvent) {
+				obj.attachEvent('on' + sEvenet, fn);
+			}
+			else {
+				obj.addEventListener(sEvenet, fn, false);
+			}
+		}
+		window.onload = function() {
+			var oBtn = document.getElementById('btn1');
+			//对象.attachEvent(事件名， 函数)
+			//对象.addEventListener(事件名， 函数， 是否捕获)
+			
+			//IE 老版本显示会先alert b再a
+			/*oBtn.attachEvent('onclick', aaa);
+			oBtn.attachEvent('onclick', bbb);*/
+			//FF
+			/*oBtn.addEventListener('click', aaa, false);
+			oBtn.addEventListener('click', bbb, false);*/
+
+			// if (oBtn.attachEvent) {
+			// 	oBtn.attachEvent('onclick', aaa);
+			// 	oBtn.attachEvent('onclick', bbb);
+			// }
+			// else {
+			// 	oBtn.addEventListener('click', aaa, false);
+			// 	oBtn.addEventListener('click', bbb, false);
+			// }
+			myAddEvent(oBtn, 'click', aaa);
+			myAddEvent(oBtn, 'click', bbb);
+
+		}
+	</script>
+</head>
+<body>
+	<div>
+		<input type="button" id="btn1" value="aaaaa" />
+	</div>
+</body>
+</html>
