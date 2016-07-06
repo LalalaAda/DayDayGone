@@ -1,0 +1,74 @@
+.Absolute-Center{
+	width: 100px;
+	height: 100px;
+	background: #eee;
+	margin: auto;
+	position: absolute;
+	top: 0;left: 0;bottom: 0;right: 0;
+	text-align: center;
+	line-height: 100px;
+}
+.is-Negative{
+	width: 300px;
+	height: 200px;
+	padding: 20px;
+	background-color: #eee;
+	position: absolute;
+	top: 50%;left: 50%;
+	margin-left: -170px;   /* (width + padding*2)/2 */
+	margin-top: -120px;    /* (height + padding*2)/2 */
+	text-align: center;
+	line-height: 200px;
+}
+.is-Transformed{
+	width: 50%;
+	margin: auto;
+	background-color: #eee;
+	height: 200px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	text-align: center;
+	line-height: 200px;
+}
+
+.block{
+	text-align: center;
+	background: #c0c0c0;
+	order: #a0a0a0 solid 1px;
+	margin: 20px;
+}
+.block:before{
+	content: '\200B'; /* content:''; margin-left: -0.25em; */
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+.centered{
+	display: inline-block;
+	vertical-align: middle;
+	width: 300px;
+	padding: 10px 15px;
+	border: #a0a0a0 solid 1px;
+	background-color: #f5f5f5;
+}
+
+html{
+	height: 100%;
+}
+body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	height: 100%;
+	width: 100%;
+}
+h1{
+	display: flex;
+	align-items: center;
+	background: #eee;
+	height: 10rem;
+}
