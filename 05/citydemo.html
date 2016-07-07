@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>三级地市级联菜单</title>
+</head>
+<body>
+	<div id="addrBox"></div>
+	<content>
+		<input type="text" name="add" id="addrText" />
+		<input type="button" name="showAddrButton" id="showAddrButton" value="显示你选择的" />
+	</content>
+	<script type="text/javascript" src="jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="juery.provincesCity.js"></script>
+	<script type="text/javascript" src="provincesdata.js"></script>
+
+	<script>
+		$(function() {
+			$("#addrBox").ProvinceCity();
+			var $sel01 = $('select').eq(0);
+			var $sel02 = $('select').eq(1);
+			var $sel03 = $('select').eq(2);
+			$("#showAddrButton").click(function(){
+				$("#addrText").val($sel01.val()+"-"+$sel02.val()+"-"+$sel03.val());
+			});
+		});
+	</script>
+</body>
+</html>

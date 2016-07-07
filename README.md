@@ -84,8 +84,33 @@
 		}
 	}
 	a(1)();  //2
-### 05 
-
+### 05  三级城市联动插件
+	原理：将城市信息写入到数组中 定义为全局变量
+	通过jquery dom操作动态添加option到select中
+	var $sel1 = _self.find('select').eq(0);
+	...
+	$.each(GP, function(index, data) {
+		$sel1.append("<option value='"+data+"'>"+data+"</option>");
+	});
+	当改变选项时:
+	var index1 = "";
+	$sel1.change(function() {
+		index1 = this.selectedIndex;
+		$sel2[0].options.length = 0;
+		$sel3[0].options.length = 0;
+		判断是否第一个已选择非默认选项
+		$.each(GT[index1-1], function(index, data){
+			$sel2.append("..........");
+		});
+		$.each(GC[index1-1][0], function(index, data){
+			$sel3.append("..........");
+		});	
+	}).change();
+	$sel2.change(function(){
+		...
+	});
+	return _self;
+### 06
 	
 
 
