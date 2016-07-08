@@ -110,8 +110,103 @@
 		...
 	});
 	return _self;
-### 06
+### 06  css3实现平滑过渡以及三角形，字体图标
 	
+	<meta http-equiv="X-UA-Compatible" content="IE--edge,chrome-=1">
+	让IE浏览器的低版本使用最新的css样式
+
+	原理:
+		用<input type="radio" id="sel1" checked="checked">覆盖在a标签上，然后根据
+	input:checked + a{
+		xxxxx;
+	}
+	关于+ 和 ~的分别，两者都是在同级元素下查找+查找后一个 ~查找后所有
+	eg：
+		div.one
+			input
+			a //id1
+			a //id2
+			p //id01
+			input
+		h3 //id02
+	input + a{} // find a (id1)
+	input ~ a{} //find a (id1 id2)
+	input + p{} //just find p(id01)
+	input ~ p{} //just find p(id01)
+	input +/~ h3{}  //error  不是同级
+	-------------------------------------------------------------
+	position：fixed； bottom：0； 固定 底部对齐的地方
+	然后用伪元素
+	input:checked:hover + a{
+		background:xxxx
+	}
+	实现鼠标滑动的颜色变化
+	页面的平滑切换用到transform变化  平移
+	tips 移动端使用translate3d(0,0,0) 会调用硬件加速器 速度更快些
+	backface-visibility: hidden; 隐藏被旋转的div元素的背面
+	倒三角形的实现
+	xxx{
+		width: 0;
+		height: 0;
+		overflow: hidden;
+		border: 20px solid transparent;
+		border-bottom-color: #821134;
+	}
+	字体图标
+	有一些字体是有图标的 所以一些图标可以引用字体去实现
+	@font-face{
+		font-family: "Raphaelicons";
+		src: url("../fonts/raphaelicons-webfont.eot") format('eot'),
+			url("../fonts/raphaelicons-webfont.svg") format('svg'),
+			url("../fonts/raphaelicons-webfont.ttf") format('truetype'),
+			url("../fonts/raphaelicons-webfont.woff") format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	然后  在元素中自定义属性data-icon  规范自定义属性都加data- 
+
+	[data-icon]:after{
+		content: attr(data-icon);
+		...
+		font-family: "Raphaelicons"; //运用有图标的字体
+	}
+	content一般和:before,:after一起使用，用来生成内容(img和input没有该属性)，
+	content的内容一般可以为以下四种：
+	none： 不生成任何值。
+	attr： 插入标签属性值
+	url： 使用指定的绝对或相对地址插入一个外部资源（图像，声频，视频或浏览器支持的其他任何资源）
+	string： 插入字符串
+
+	animation 不需要用户主观驱动（例如 鼠标点击 滑动）
+	transition  需要用户主观驱动（如鼠标点击)
+
+	animation的animation-fill-mode 属性：
+		none，默认样式。
+		forwards，动画结束后，保留关键帧最后一帧的样式。
+		backwards，动画开始前就应用关键帧第一个帧的样式。
+		both，上面两个都用上。
+	
+	animation 需要写@keyframes
+	eg：
+	xxx{
+		-webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+	}
+	@-webkit-keyframes moveDown{
+		0%{
+			xxxx;
+		}
+		100%{
+			xxxx;
+		}
+		//  也可以  开始 from 结束 to
+		// 0% 10% 50% ...100% 分帧显示
+	}
+	最后媒体查询
+	@media screen and (min-width: 330px) and (max-width: 1024px){
+		xxxx;
+	}
+### 07  
+
 
 
 
