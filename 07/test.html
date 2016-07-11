@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>elements</title>
+</head>
+<body>
+	<ul>
+		<li>chrome</li>
+		<li>firefox</li>
+	</ul>
+	<p id="demo">hahahahaha</p>
+	<button onclick="mine()"></button>
+	<script>
+		function mine(){
+			var d = document.createDocumentFragment();
+			d.appendChild(document.getElementsByTagName("li")[0]);
+			//d.childNodes[0] <li>IE</li> 
+			//d.childNodes[0].childNodes[0]  "chrome"
+			d.childNodes[0].childNodes[0].nodeValue="IE";
+			document.getElementsByTagName("ul")[0].appendChild(d);
+		}
+	</script>
+</body>
+</html>
