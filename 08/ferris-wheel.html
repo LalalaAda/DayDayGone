@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>旋转摩天轮</title>
+	<meta charset="utf-8"/>
+	<style>
+	   body{
+	   	background:url(images/2.jpg) no-repeat;
+	   }
+	   .box{
+	   	position:relative;
+	   	width:100%;
+	   	height:100%;
+	   	margin:0 auto;
+	   }
+	   .wheel{
+	   	position:relative;
+	   	width:768px;
+	   	height:768px;
+	   	margin:0 auto;
+	   	background:url(images/fsw.png) no-repeat;
+	   	z-index:8;
+	   	-webkit-animation:rotate 8s linear 0 infinite normal;
+	   	-moz-animation:rotate 8s linear 0 infinite normal;
+	   	-o-animation:rotate 8s linear 0 infinite normal;
+	   	animation:rotate 8s linear 0s infinite normal;
+	   }
+	   @-webkit-keyframes rotate{
+	   	0%{-webkit-transform:rotate(0deg)}
+	   	100%{-webkit-transform:rotate(360deg)}
+	   }
+	   @-moz-keyframes rotate{
+	   	0%{-webkit-transform:rotate(0deg)}
+	   	100%{-webkit-transform:rotate(360deg)}
+	   }
+	   @-o-keyframes rotate{
+	   	0%{-webkit-transform:rotate(0deg)}
+	   	100%{-webkit-transform:rotate(360deg)}
+	   }
+	   @keyframes rotate{
+	   	0%{transform:rotate(0deg)}
+	   	100%{transform:rotate(360deg)}
+	   }
+	   .wheel li{
+	   	list-style:none;
+	   }
+       .wheel li img{
+       	position:absolute;
+       	display:block;
+       	width:130px;
+       	height:170px;
+       	-webkit-animation:rotatechild 8s linear 0 infinite normal;
+       	-webkit-transform-origin:50% 0;
+       	-moz-animation:rotatechild 8s linear 0 infinite normal;
+       	-moz-transform-origin:50% 0;
+       	-o-animation:rotatechild 8s linear 0 infinite normal;
+       	-o-transform-origin:50% 0;
+       	animation:rotatechild 8s linear 0s infinite normal;
+       	transform-origin:50% 0;
+       }
+       @-webkit-keyframes rotatechild{
+       	0%{-webkit-transform:rotate(0deg)}
+       	100%{-webkit-transform:rotate(-360deg)}}
+       @-moz-keyframes rotatechild{
+       	0%{-moz-transform:rotate(0deg)}
+       	100%{-moz-transform:rotate(-360deg)}}
+       @-o-keyframes rotatechild{
+       	0%{-o-transform:rotate(0deg)}
+       	100%{-o-transform:rotate(-360deg)}}
+       @keyframes rotatechild{
+       	0%{transform:rotate(0deg)}
+       	100%{transform:rotate(-360deg)}
+       }
+
+       	.c1{top:30px;left:320px;}
+       	.c2{top:130px;left:575px;}
+       	.c3{top:380px;left:672px;}
+       	.c4{top:633px;left:577px;}
+       	.c5{top:740px;left:326px;}
+       	.c6{top:638px;left:74px;}
+       	.c7{top:386px;left:-34px;}
+       	.c8{top:130px;left:70px;}
+       	.bracket{
+       		position:absolute;
+       		top:380px;
+       		left:517px;
+       		width:358px;
+       		height:529px;
+       		background:url(images/bracket.png);
+       		z-index:9;
+       	}
+       	.bracketsmall{
+       		position:absolute;
+       		top:380px;
+       		left:570px;
+       		width:247px;
+       		height:505px;
+       		background:url(images/bracketsmall.png);
+       		z-index:7;
+       	}
+        .bigtitle{
+        	position:absolute;
+        	background:url(images/big-title.png) no-repeat;
+        	top:250px;
+        	left:400px;
+        	width:577px;
+        	height:380px;
+        	z-index:10;
+        }
+        .title{
+        	position:absolute;
+        	background:url(images/title.png)no-repeat;
+        	top:450px;
+        	left:500px;
+        	width:413px;
+        	height:139px;
+        	z-index:10;
+        }
+        .arrow{
+        	position:absolute;
+        	background:url(images/arrow.png) no-repeat;
+        	top:540px;
+        	left:680px;
+        	width:48px;
+        	height:64px;
+        	z-index:10;
+        }
+	</style>
+</head>
+<body>
+<div class="box">
+	<div class="wheel">
+	<ul>
+		<li><img class="c1" src="images/boy.png"></li>
+		<li><img class="c2" src="images/dog.png"></li>
+		<li><img class="c3" src="images/girl.png"></li>
+		<li><img class="c4" src="images/girls.png"></li>
+		<li><img class="c5" src="images/hairboy.png"></li>
+		<li><img class="c6" src="images/mimi.png"></li>
+		<li><img class="c7" src="images/mudog.png"></li>
+		<li><img class="c8" src="images/shamegirl.png"></li>
+	</ul>
+		</div>
+	<!--支架-->
+	<div class="bracket"></div>
+	<!--小支架-->
+	<div class="bracketsmall"></div>
+	<div class="bigtitle"></div>
+	<div class="title"></div>
+	<!--箭头-->
+	<div class="arrow"></div>
+</div>
+</body>
+</html>
