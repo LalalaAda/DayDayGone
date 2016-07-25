@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>flex 布局</title>
+	<style type="text/css">
+		.box{
+			width: 150px;
+			height: 150px;
+			background: red;
+		}
+		.item{
+			width: 50px;
+			height: 50px;
+			background: #000;
+		}
+		.box0{
+			display: flex;
+		}
+		.box1{
+			display: flex;
+			justify-content: center;
+		}
+		.box2{
+			display: flex;
+			justify-content: flex-end;
+		}
+		.box3{
+			display: flex;
+			align-items: center;
+		}
+		.box4{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.box5{
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
+		.box6{
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+		}
+		.box7{
+			display: flex;
+			justify-content: space-between;
+		}
+		.box8{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		.box9{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.box10{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: flex-end;
+		}
+		.box11{
+			display: flex;
+		}
+		.item:nth-child(2){
+			align-self: center;
+		}
+		.box12{
+			display: flex;
+			justify-content: space-between;
+		}
+		.item1{
+			width: 50px;
+			height: 50px;
+			background: black;
+		}
+		.item1:nth-child(2){
+			align-self: flex-end;
+		}
+		.box13{
+			display: flex;
+		}
+		.item2{
+			width: 50px; height: 50px;
+			background: yellow;
+		}
+		.item2:nth-child(2){
+			align-self: center;
+		}
+		.item2:nth-child(3){
+			align-self: flex-end;
+		}
+		.box14{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+			align-content: space-between;
+			width: 160px;
+			height: 160px;
+		}
+		.item3{
+			width: 50px;
+			height: 50px;
+			background: green;
+		}
+
+		.box15{
+			display: flex;
+			flex-wrap: wrap;
+			align-content: space-between;
+			width: 160px;
+			height: 160px;
+			background: red;
+		}
+		.column{
+			flex-basis: 100%;
+			display: flex;
+			justify-content: space-between;
+		}
+		.itit{
+			width: 50px;
+			height: 50px;
+			background: yellow;
+		}
+		.box16{
+			width: 150px; height: 150px;
+			display: flex;
+			flex-wrap: wrap;
+			align-content: space-between;
+			background: black;
+		}
+		.it6{
+			width: 50px; height: 50px;
+			background: #fff;
+		}
+
+		.box17{
+			width: 150px; height: 150px;
+			display: flex;
+			flex-wrap: wrap;
+			background: red;
+		}
+		.row{
+			flex-basis: 100%;
+			display: flex;
+		}
+		.row:nth-child(2){
+			justify-content: center;
+		}
+		.row:nth-child(3){
+			justify-content: space-between;
+		}
+		.it7{
+			width: 50px;height: 50px;
+			background: yellow;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box box14">
+		<span class="item3"></span>
+		<span class="item3"></span>
+		<span class="item3"></span>
+		<span class="item3"></span>
+	</div>
+	<div class="box15">
+		<div class="column">
+			<span class="itit"></span>
+			<span class="itit"></span>
+		</div>
+		<div class="column">
+			<span class="itit"></span>
+			<span class="itit"></span>
+		</div>
+	</div>
+	<div class="box16">
+		<span class="it6"></span>
+		<span class="it6"></span>
+		<span class="it6"></span>
+		<span class="it6"></span>
+		<span class="it6"></span>
+		<span class="it6"></span>
+	</div>
+	<div class="box17">
+		<div class="row">
+			<span class="it7"></span>
+			<span class="it7"></span>
+			<span class="it7"></span>
+		</div>
+		<div class="row">
+			<span class="it7"></span>
+		</div>
+		<div class="row">
+			<span class="it7"></span>
+			<span class="it7"></span>
+		</div>
+	</div>
+	<div class="box box18" style="display: flex; flex-wrap:wrap">
+		<span class="item it8"></span>
+		<span class="item it8"></span>
+		<span class="item it8"></span>
+		<span class="item it8"></span>
+		<span class="item it8"></span>
+		<span class="item it8"></span>
+		<span class="item it8"></span>
+		<span class="item it8"></span>
+		<span class="item it8"></span>
+	</div>
+</body>
+</html>
