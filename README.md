@@ -216,3 +216,8 @@
 ### 11 js回到顶部
 	滚动距离采用的是，剩余高度除以6 即每次滚动都是剩余高度的6分之一
 	使用高度加负数的原因是因为 有情况是到不了scrollTop==0的
+### 12 float
+	清除浮动
+	.clearfix:after{ content:""; display:table; clear:both;} ie8+
+	.clearfix { *zoom:1;} ie6
+
