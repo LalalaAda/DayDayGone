@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS事件代理</title>
+</head>
+<body>
+	<div>
+		<ul id="ulItem">
+			<li id="li1">1</li>
+			<li id="li2">2</li>
+			<li id="li3">3</li>
+			<li id="li4">4</li>
+			<li id="li5">5</li>
+			<li id="li6">6</li>
+			<li id="li7">7</li>
+			<li id="li8">8</li>
+			<li id="li9">9</li>
+			<li id="li10">10</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ulItem = document.getElementById("ulItem");
+			for(var i = 11; i<1000; i++){
+				var liobj = document.createElement("li");
+					liobj.id = "li"+i;
+					liobj.innerHTML = i;
+					ulItem.appendChild(liobj);
+				//运用匿名包装器？ 不必要 这种情况适用与setTimeout那种延时的
+				// (function(e){
+				// 	var liobj = document.createElement("li");
+				// 	liobj.id = "li"+e;
+				// 	liobj.innerHTML = e;
+				// 	ulItem.appendChild(liobj);
+				// })(i);
+			}
+		}
+	</script>
+	<script>
+		var ulItem = document.getElementById("ulItem");
+		//事件代理 js冒泡机制
+		ulItem.onclick = function(e){
+			e=e||window.event; //兼容ie8及以下
+			var target = e.target || e.srcElement;
+			if (target.tagName.toLowerCase() === "li") {
+				alert(target.innerHTML);
+				alert("位置为：" + getElementPosition(target).x+","+
+					getElementPosition(target).y);
+			}
+		}
+		//运用闭包函数获取偏移量
+		function getElementPosition(e){
+			var x= 0,y=0;
+			while(e!=null){
+				x+=e.offsetLeft;
+				y+=e.offsetTop;
+				e = e.offestParent;
+			}
+			return {
+				x:x,
+				y:y
+			};
+		}
+	</script>
+</body>
+</html>

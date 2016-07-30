@@ -220,4 +220,19 @@
 	清除浮动
 	.clearfix:after{ content:""; display:table; clear:both;} ie8+
 	.clearfix { *zoom:1;} ie6
-
+	#### float 和 absolute
+		float 和 absolute 特性
+		包裹性
+		破坏性
+		1.包裹性 容器absolute  绝对定位 会包裹内容 即高度宽度压缩至内容
+		2.破坏性 内容absolute  会导致父容器高度塌陷 父容器在上薄薄一层,内容溢出
+	#### js事件代理
+		利用js的事件冒泡 处理动态添加N多li并绑定点击事件，
+		应该绑定ul 不是li
+		e = e || window.event;兼容ie8及以下
+		var target = e.target||e.srcElement; 同样是兼容ie
+		if(target.tagName.toLowerCase() === "li"){
+			//处理li的点击事件
+		}else{
+			//非li的点击事件
+		}
