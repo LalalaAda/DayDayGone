@@ -1,0 +1,224 @@
+overflow属性生效
+1.非display:inline
+2.对应方位尺寸限制 width/height/max-width/max-height/absolute拉伸
+3.对于单元格td等，还需要table为table-layout: fixed状态才行
+
+ie7下文字越多按钮两侧padding留白就越大
+同样在ie8下无此问题
+解决方案给所有按钮添加css样式overflow：visible;
+
+准确说法应该是滚动栏宽度
+.box{ width:400px; overflow: scroll;}
+.in{ *zoom:1;/* for IE7 */}
+
+<div class="box">
+	<div id="in" class="in"></div>
+</div>
+
+console.log(400 - document.getElementById("in").clientWidth);
+结果： IE7+/Chrome/FireFox(win7) 均是17像素
+
+overflow-x: scroll;
+overflow-y: scroll;
+当x y的值不相等，其中一个为visible 另一个为hidden scroll auto
+则visible的值会变为auto
+
+overflow的padding-up/bottom缺失现象
+chrome会有 其他浏览器则没有 即显示滑动条的时候
+往下滑其他浏览器是滑不出padding占的空隙的
+
+滚动高度
+document.body.scrollTop  chrome
+document.documentElement.scrollTop 其他
+兼容写法：
+var st = document.body.scrollTop || document.documentElement.scrollTop;
+
+滚动条出现 html默认  不是在body中
+ie7-浏览器默认形式： html{ overflow-y:scroll; } 
+	但是ie7不支持css3中的overflow-x/y
+ie8+: html { overflow: auto;}
+所以要去除默认滚动条则 html{ overflow:hidden;} 不用写body{overflow:hidden;}
+
+水平居中跳动问题的修复:
+1: html{ overflow-y: scroll;}
+2: .container { padding-left: calc(100vw - 100%);} (推荐 but ie8+)
+浏览器宽度 100vw  可用内容宽度100%
+
+overflow:auto;
+ie7出现bug 子元素设置width: 100%; 会出现两个滚动条 x y轴的
+因为滚动条是默认占宽度的 ie7中width:100% 算出来是父元素的width值
+但是有了y轴滚动条 则内容宽度就不够100%啦 所以ie7慎用width:100%;
+
+自定义滚动条-webkit
+整体部分
+::-webkit-scrollbar   100px*100px
+两端按钮
+::-webkit-scrollbar-button 
+外层轨道
+::-webkit-scrollbar-track
+内层轨道
+::-webkit-scrollbar-track-piece
+滚动滑块
+::-webkit-scrollbar-thumb
+边角
+::-webkit-scrollbar-corner
+
+实际开发中常用：
+::-webkit-scrollbar{ /* 血槽宽度 */
+	width: 8px; height: 8px;
+}
+::-webkit-scrollbar-thumb{/* 拖动条 */
+	background-color: rgba(0,0,0,.3);
+}
+::-webkit-scrollbar-track{/* 背景槽 */
+	background-color: #ddd;
+	border-radius: 6px;
+}
+
+jq插件 自定义滚动条
+https://github.com/malihu/malihu-custom-scrollbar-plugin
+
+ios原生滚动回调效果 bouns特效
+-webkit-overflow-scrolling: touch;
+
+
+BFC(Block formatting context)块级格式化上下文
+页面之结界，内部元素再怎么翻云覆雨都不影响外部
+
+overflow: visible;不触发BFC  其他属性则触发 如auto,scroll,hidden
+
+BFC 清楚浮动影响  避免margin穿透问题  两栏自适应布局
+内部浮动无影响
+ie6不支持 
+ie7+等支持
+.clearfix { overflow: hidden; _zoom:1; }
+然而，副作用明显，hidden掉了溢出的部分，于是更推荐：
+.clearfix { *zoom: 1; }
+.clearfix:after{ content:"";display: table; clear:both;}
+
+避免margin穿透问题 方法之一设置overflow属性 触发bfc
+子元素的margin-top 不是对于父级 会穿出父级越到祖父级
+
+两栏自适应布局：
+img.left
+div.right
+	> img*2
+
+
+.left{ float:left; width 128px;}
+.right{ min-height: 190px; overflow: hidden; background: #ddd;}
+两者间隔：
+.right{} 可以使用margin-left  但是需要设置超大才有效果 margin-left: 150px;
+推荐padding-left   padding-left: 10px;就可以了.
+更推荐.left{} margin-right: 20px;
+
+是不是所以BFC属性都有此表现？
+yes 但具体表现不一
+
+overflow:hidden; 自适应，但“溢出不可见” 限制应用场景
+float + float 包裹性+破坏性，无法自适应，块状浮动布局
+position:absolute 脱离文档流，自娱自乐
+display: inline-block 包裹性，无法自适应； ie6/ie7 block水平不相识
+display:table-cell 包裹性，但天生无溢出特性，绝对宽度也能自适应
+
+所以跟清除浮动影响类似：
+.cell { overflow: hidden; _display: inline-block;}
+然而，依旧是溢出内容不显示 于是
+.cell{
+	display: table-cell; width: 2000px; //ie8+ bfc
+	*display: inline-block; *width: auto; //ie7- 伪bfc
+}
+
+
+使用position:absolute;
+overflow:hidden; overflow  滚动失效
+
+失效原因：
+绝对定位元素不总是被父级overflow属性剪裁，尤其当
+overflow在绝对定位元素及其包含块之间的时候
+包含块指“含position:relative/absolute/fixed声明的父级元素
+若无则body元素
+body(包含块)
+	div.overflow-hidden
+		img(absolute)
+overflow元素正好在绝对定位元素和包含块之间
+解决失效方法：
+1.overflow元素自身为包含块
+	style="position:relative;"
+2.子元素为包含块
+	<div class="oveflow-hidden">
+		<div style="position:relative">
+			<img class="absolute">
+		</div>
+	</div>
+3.transform声明当作包含块
+	1.overflow元素自身transform:
+		ie9+/fireFox  OK
+		Chrome/Safari/Opera  no
+	2.overflow子元素transform:
+		ie9+/FireFox  ok
+		Chrome/Safari/Opera ok
+ 动态渲染异常：Chrome包含块重定位/opera同，但
+ 点击重绘自修正/safari非定位overflow元素左上角
+
+
+ overflow失效妙用
+ .h0{ height: 0;}
+ .ovh{ overflow: hidden;}
+ .tr{ text-align: right;}
+ .abs{ position: absolute;}
+
+ <div class="h0 ovh tr">
+ 	&nbsp;<img src="fixed-right.png" class="abs ml10 mt30">
+ </div>
+ 这样 固定右边的元素不与滚动条移动
+
+ resize拉伸
+ css3有个属性名为resize，可以拉伸元素尺寸
+ resize:both 水平垂直两边拉
+ resize:horizontal 只有水平方向拉
+ resize:vertical 只有垂直方向拉
+ 但是，此声明要想要其作用，元素的overflow属性值不能是visible
+ <button style="resize: both; overflow:hidden;">
+ 	我是按钮
+ </button>
+ textarea天生自带属性overflow:auto 所以resize直接用
+ resize右下角的那个拖拽区域 为 17像素*17像素 机制类似滚动条
+
+ text-overflow: ellipsis 文字溢出点点点省略
+同样需要overflow来
+
+<button style="width:200px; white-space:nowrap;
+ text-overflow:ellipsis; overflow:hidden;">
+ 	我是一个按钮，宽度仅200像素
+</button>
+
+锚点  <a href="#mm5"></a>
+	
+	<div id="mm5"></div>
+锚点定位的本质： 改变容器的滚动高度
+触发锚点定位 锚点元素通过scrollTop值改变向上偏移定位 
+ 锚元素的上边缘和可滚动容器上边缘对齐
+
+锚点定位触发：
+1.url地址中锚链与锚点元素
+2.可focus的锚点元素处于focus态 （tab键使用效果）
+
+锚点定位作用
+1.快速定位
+2.锚点定位与overflow选项卡技术
+	<div class="box">
+		<div class="list" id="one">1</div>
+		<div class="list" id="two">2</div>
+		<div class="list" id="three">3</div>
+		<div class="list" id="four">4</div>
+	</div>
+	<div class="link">
+		<a class="click" href="#one">1</a>
+		<a class="click" href="#two">2</a>
+		<a class="click" href="#three">3</a>
+		<a class="click" href="#four">4</a>
+	</div>
+	技术不足： 穿透性强，会定位到最外面的滚动条
+	适用场景为 单页应用的选项卡
+
