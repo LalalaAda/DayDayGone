@@ -102,5 +102,25 @@
 	<p>403 没有权限,禁止访问</p>
 	<p>500 服务器产生内部错误</p>
 	<p>503 服务不可用</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+	<p>
+		function getXMLHTTPRequest() { <br>
+			var req = false;<br>
+			try{<br>
+				req = new XMLHttpRequest();<br>
+			} catch (err) {<br>
+				try{<br>
+					req = new ActiveXObject ("Msxml2.XMLHTTP");<br>
+				} catch(err){<br>
+					try{<br>
+						req = new ActiveXObject("Microsoft.XMLHTTP");<br>
+					}catch(err){<br>
+						req = false;<br>
+					} <br>
+				} <br>
+			} <br>
+			return req;<br>
+		} <br>
+	</p>
 </body>
 </html>
