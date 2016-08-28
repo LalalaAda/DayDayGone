@@ -1,0 +1,56 @@
+1.javascript数据类型
+	基本数据类型：String, boolean, Number, Undefined, Null
+	引用数据类型：Object(Array, Date, RegExp, Function)
+
+	如何判断是否为数组类型 
+	ECMA Script5  Array.isArray();
+	兼容方法：
+	if (typeof Array.isArray === "undefined"){
+		Array.isArray = function(arg){
+			return Object.prototype.toString.call(arg) === "[object Array]";
+		}
+	}
+2.已知ID的Input输入框,希望获取这个输入框的值
+	document.getElementById("id").value
+3.希望获取到页面中所有的checkbox怎么做
+	var domList = document.getElementsByTagName('input');
+	var checkBoxList = [];
+	var len = domList.length;
+	while(len--){
+		if(domlist[len].type == 'checkbox'){
+			checkBoxList.push(domlist[len]);
+		}
+	}
+4.设置一个已知id的div的html内容为xxx，字体颜色设置为黑色
+	var dom = document.getElementById("id");
+	dom.innerHTML = "xxxx";
+	dom.style.color = "#000";
+5.当一个DOM节点被点击时候，我们希望能够执行一个函数
+	#1 直接在dom里绑定事件： <div onclick="test()"></div>
+	#2 在js中通过onclick绑定: xxx.onclick = test;
+	#3 通过事件添加进行绑定: addEventListener(xxx, 'click', test);
+	javascript的事件流模型都有什么
+	“事件冒泡”: 事件开始由最具体的元素接受，然后逐级向上传播
+	“事件捕捉”: 事件由最不具体的节点先接收，然后逐级向下，一直到最具体的
+	“DOM事件流”: 三个阶段，事件捕捉，目标阶段，事件冒泡
+6.什么事Ajax和Json，优缺点
+	Ajax是异步javascript和xml,用于在web页面中实现异步数据交互
+	优点：
+		可以使得页面不重载全部内容的情况下加载局部内容，降低数据传输量
+		避免用户不断刷新或者跳转页面，提高用户体验
+	缺点：
+		对搜索引擎不友好
+		要实现ajax下的前进后退功能成本较大
+		可能造成请求数的增加
+		跨域问题限制
+	JSON是一种轻量级的数据交换格式，ECMA的一个子集
+	优点：轻量级，易于人的阅读和编写，便于机器解析，支持复合数据类型
+		（数组、对象。字符串、数字）
+7.看下列代码输出为何？解释原因
+	var a;
+	alert(typeof a); //undefined
+	alert(b); //报错
+	解释： Undefined是一个只有一个值的数据类型，这个值就是undefined，在
+	使用var声明变量但并未对其赋值进行初始化时，这个变量的值就是undefined
+	而b由于未声明将报错
+8.

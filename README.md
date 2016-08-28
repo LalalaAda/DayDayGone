@@ -238,3 +238,20 @@
 		}
 ### 13 overflow
 	#### overflow.txt
+### 14 面试题
+	####
+### 15 原生ajax写法
+	#### 用一个不存在的变量会报错，但是用一个不存在的属性则是：undefined
+	var req = new XMLHttpRequest()
+	req.open("GET", url ,true);最后一个参数 是否异步
+	req.send();
+	req.onreadystatechange = function(){
+		if(req.readyState == 4){
+			if(req.status == 200){
+				//ok
+			} else {
+				//error
+			}
+		}
+	}
+###

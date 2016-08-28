@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test ajax</title>
+	<script>
+		window.onload = function(){
+			// alert(window.a);
+			// alert(a);
+			
+
+			// var oAjax = null;
+			// if (window.XMLHttpRequest) {
+			// 	oAjax = new XMLHttpRequest();
+			// } else {
+			// 	oAjax = new ActiveXObject("Microsoft.XMLHTTP");
+			// }
+			// alert(oAjax);
+			// 
+			
+
+
+		}
+		function createXMLHTTPRequest() {
+			var xmlHttpRequest;
+			if (window.XMLHttpRequest) {
+				xmlHttpRequest = new XMLHttpRequest();
+				if (xmlHttpRequest.overrideMimeType) {
+					xmlHttpRequest.overrideMimeType("text/xml");
+				}
+			} else if (window.ActiveXObject) {
+				// 针对IE6 IE5.5 IE5
+				// 两个可以用于创建XMLHTTPREQUEST对象的控件名称，保存在一个
+				// js数组中，排在前面的版本较新
+				var activexName = ["MSXML2.XMLHTTP", "Microsoft.XMLHTTP"];
+				for (var i = 0;i<activexName.length;i++) {
+					try {
+						xmlHttpRequest = new ActiveXObject(activexName[i]);
+						if (xmlHttpRequest) {
+							break;
+						}
+					} catch (e) {
+
+					}
+				}
+			}
+			return xmlHttpRequest;
+		}
+		function get() {
+			var req = createXMLHTTPRequest();
+			if (req) {
+				req.open("GET", "http://test.com/?keywords=手机", true);
+				req.onreadystatechange = function() {
+					if (req.readyState == 4) {
+						if (req.status == 200) {
+							alert("success");
+						} else {
+							alert("error");
+						}
+					}
+				}
+				req.send(null);
+			}
+		}
+		function post() {
+			var req = createXMLHTTPRequest();
+			if (req) {
+				req.open("POST", "http://test.com/", true);
+				req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=gbk");
+				req.send("keywords=手机");
+				req.onreadystatechange = function(){
+					if (req.readyState == 4) {
+						if (req.status == 200) {
+							alert("success");
+						} else {
+							alert("error");
+						}
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<p>readyState与status</p>
+	<p>readyState有五种状态</p>
+	<p>0(未初始化): (XMLHttpRequest)对象已经创建，但还没有调用open()方法</p>
+	<p>1(载入)：已经调用open()方法，但尚未发送请求</p>
+	<p>2(载入完成)：请求已经发送完成</p>
+	<p>(交互)：可以接收到部分响应数据</p>
+	<p>(完成)：已经接收到了全部数据，并且连接已经关闭</p>
+	<p>readyState on client | status on server</p>
+	<p>status状态</p>
+	<p>100 - 客户必须继续发出请求</p>
+	<p>101   客户要求服务器根据请求转换HTTP协议版本</p>
+	<p>200 成功</p>
+	<p>201 提示知道新文件的URL</p>
+	<p>300 请求的资源可在多处得到</p>
+	<p>301 删除请求数据 永久移动</p>
+	<p>302 临时重定向</p>
+	<p>404 没有发现文件、查询或url</p>
+	<p>403 没有权限,禁止访问</p>
+	<p>500 服务器产生内部错误</p>
+	<p>503 服务不可用</p>
+</body>
+</html>
