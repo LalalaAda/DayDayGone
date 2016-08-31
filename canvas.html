@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas</title>
+</head>
+<body>
+	<canvas id="canvas" width="800px" height="800px"></canvas>
+	<script>
+	window.onload = function(e){
+		var a=[250,50];
+		var b=[200,200];
+		var c=[300,300];
+		var canvas = document.getElementById("canvas");
+		var cxt = canvas.getContext("2d");
+		cxt.beginPath();
+		cxt.moveTo(a[0],a[1]);
+		cxt.lineTo(b[0],b[1]);
+		cxt.lineTo(c[0],c[1]);
+		cxt.closePath();
+		cxt.strokeStyle="red";
+		cxt.stroke();
+
+		e=e||window.event;
+		var startX,startY;
+		var dragging=0;
+		document.onmousedown = function(e){
+			startX=e.pageX;
+			startY=e.pageY;
+			var sizeA = Math.pow(((startX-a[0])*(startX-a[0])+(startY-a[1])*(startY-a[1])),0.5);
+			var sizeB = Math.pow(((startX-b[0])*(startX-b[0])+(startY-b[1])*(startY-b[1])),0.5);
+			var sizeC = Math.pow(((startX-c[0])*(startX-c[0])+(startY-c[1])*(startY-c[1])),0.5);
+			if (sizeA<14||sizeB<14||sizeC<14) {
+				if(sizeA<sizeB){
+					if(sizeA<sizeC){
+						dragging=1;
+					}else{
+						dragging=3;
+					}
+				}else{
+					if(sizeB<sizeC){
+						dragging=2;
+					}else{
+						dragging=3;
+					}
+				}
+			}else{
+				dragging=0;
+			}
+		}
+		document.onmousemove = function(e){
+			//....
+		}
+		document.onmouseup = function(e){
+			var xx=e.pageX;
+			var yy=e.pageY;
+			cxt.beginPath();
+			cxt.clearRect(0,0,canvas.width,canvas.height);
+			
+			
+			cxt.beginPath();
+			cxt.strokeStyle="red";
+			if (dragging==1) {
+				cxt.moveTo(xx,yy);
+				cxt.lineTo(b[0],b[1]);
+				cxt.lineTo(c[0],c[1]);
+				a[0]=xx;a[1]=yy;
+
+			}else if(dragging==2){
+				cxt.moveTo(a[0],a[1]);
+				cxt.lineTo(xx,yy);
+				cxt.lineTo(c[0],c[1]);
+				b[0]=xx;b[1]=yy;
+			}else if(dragging==3){
+				cxt.moveTo(a[0],a[1]);
+				cxt.lineTo(b[0],b[1]);
+				cxt.lineTo(xx,yy);
+				c[0]=xx;c[1]=yy;
+			}
+			cxt.closePath();
+			cxt.stroke();
+
+		}
+	}
+	</script>
+</body>
+</html>

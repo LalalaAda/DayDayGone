@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SVG</title>
+</head>
+<body>
+	<svg width="100vw" height="100vh">
+		<polygon id="sjx" points="220,100 300,210 170,250" style="fill:#cccccc;stroke:#000000;stroke-width:1"></polygon>
+
+	</svg>
+	<script>
+	window.onload= function(e){
+		var polygon = document.getElementById("sjx");
+		//console.log(polygon.points);
+		var a = polygon.points[0];
+		var b = polygon.points[1];
+		var c = polygon.points[2];
+		// polygon.addEventListener("click", changeSize, false);
+		// function changeSize(evt){
+		// 	var target = evt.target;
+		// 	target.setAttribute("points", "100,100 200,50 300,200");
+		// }
+
+		e= e|| window.event;
+		var startX,startY;
+		var dragging = 0;
+		document.onmousedown = function(e){
+			startX = e.pageX;
+			startY = e.pageY;
+			//console.log(e.pageX);
+			// 误差在+-10px之内
+			// 但是这个判断语句存在问题 若两个x值相近则只能判定到a 即第一个polygon定位属性
+			// if(Math.abs(a.x-startX)<10){
+			// 	if(Math.abs(a.y-startY)<10){
+			// 		dragging=1;
+			// 		console.log("aaaaaa");
+			// 	}else{
+			// 	}
+			// }else if(Math.abs(b.x-startX)<10){
+			// 	if(Math.abs(b.y-startY)<10){
+			// 		dragging=2;
+			// 		console.log("bbbbbbbbb");
+			// 	}else{
+			// 	}
+			// }else if(Math.abs(c.x-startX)<10){
+			// 	if(Math.abs(c.y-startY)<10){
+			// 		dragging=3;
+			// 		console.log("ccccccc");
+			// 	}else{
+			// 	}
+			// }
+			// 需要求两点之间距离 来判定是哪个点拖动
+			var sizeA = Math.pow(((startX-a.x)*(startX-a.x)+(startY-a.y)*(startY-a.y)),0.5);
+			var sizeB = Math.pow(((startX-b.x)*(startX-b.x)+(startY-b.y)*(startY-b.y)),0.5);
+			var sizeC = Math.pow(((startX-c.x)*(startX-c.x)+(startY-c.y)*(startY-c.y)),0.5);
+			//误差为+-10px 
+			if(sizeA<14||sizeB<14||sizeC<14){
+				if(sizeA<sizeB){
+					if(sizeA<sizeC){
+						dragging=1;
+					}else{
+						dragging=3;
+					}
+				}else{
+					if(sizeB<sizeC){
+						dragging=2;
+					}else{
+						dragging=3;
+					}
+				}
+			}else{
+				dragging=0;
+			}
+			
+		}
+		document.onmousemove = function(e){
+			var ta = polygon.points[0];
+			var tb = polygon.points[1];
+			var tc = polygon.points[2];
+			var ax=e.pageX;
+			var ay=e.pageY;
+			var attr = "";
+			if (dragging==1) {
+				attr = ax+","+ay+" "+tb.x+","+tb.y+" "+tc.x+","+tc.y;
+				polygon.setAttribute("points", attr);	
+			}else if(dragging==2){
+				attr = ta.x+","+ta.y+" "+ax+","+ay+" "+tc.x+","+tc.y;
+				polygon.setAttribute("points", attr);
+			}else if(dragging==3){
+				attr = ta.x+","+ta.y+" "+tb.x+","+tb.y+" "+ax+","+ay;
+				polygon.setAttribute("points", attr);
+			}
+		}
+		document.onmouseup = function(e){
+			dragging=0;
+			a=polygon.points[0];
+			b=polygon.points[1];
+			c=polygon.points[2];
+		}
+	}
+
+	
+	</script>
+</body>
+</html>

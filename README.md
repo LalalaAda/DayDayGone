@@ -254,4 +254,6 @@
 			}
 		}
 	}
-###
+### 16 vertical-align实际运用
+	#### 负值实现图标文字居中
+	#### 不定尺寸图片或多行文字垂直居中 主体inline-block 辅助元素0宽度100%高度 两者都：vertical-align：middle
