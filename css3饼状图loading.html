@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS3饼状图</title>
+  <style>
+    .wrap{width: 64px;height: 64px;position: relative;}
+    .outer{position: absolute;width: 100%;height: 100%;background: url('data:image/png;base64,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') no-repeat;animation: spin 800ms infinite linear;}
+    @keyframes spin{
+      0% {transform: rotate(360deg);}
+      100% {transform: rotate(0deg);}
+    }
+    @keyframes second-half-hide{
+      0% {opacity: 1;}
+      50%, 100%{opacity: 0;}
+    }
+    @keyframes second-half-show{
+      0% {opacity: 0;}
+      50%, 100%{opacity: 1;}
+    }
+  </style>
+  <style>
+    .inner, .inner2{position: absolute;width: 38px;height: 38px;border-radius: 40px;overflow: hidden; left: 13px;top: 13px;}
+    .inner{opacity: 1;background-color: #89abdd;animation: second-half-hide 1.6s steps(1, end) infinite;}
+    .inner2{opacity: 0;background-color: #4b86db;animation: second-half-show 1.6s steps(1, end) infinite;}
+
+    .spiner, .filler, .masker{position: absolute; width: 50%;height: 100%;}
+    .spiner{border-radius: 40px 0 0 40px;background-color: #4b86db;transform-origin: right center;animation: spin 800ms infinite linear; left: 0;top: 0;}
+    .filler{border-radius: 0 40px 40px 0;background-color: #4b86db;animation: second-half-hide 800ms steps(1, end) infinite; left: 50%;top: 0;opacity: 1;}
+    .masker{border-radius: 40px 0 0 40px;background-color: #89abdd;animation: second-half-show 800ms steps(1, end) infinite;left: 0;top: 0;opacity: 0;}
+
+    .inner2 .spiner, .inner2 .filler{background-color: #89abdd;}
+    .inner2 .masker{background-color: #4b86db;}
+
+  </style>
+</head>
+<body>
+  <header></header>
+  <section>
+    <div class="wrap">
+      <div class="outer"></div>
+      <div class="inner">
+        <div class="spiner"></div>
+        <div class="filler"></div>
+        <div class="masker"></div>
+      </div>
+      <div class="inner2">
+        <div class="spiner"></div>
+        <div class="filler"></div>
+        <div class="masker"></div>
+      </div>
+    </div>
+  </section>
+  <footer></footer>
+</body>
+</html>
